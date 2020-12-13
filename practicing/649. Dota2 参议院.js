@@ -1,4 +1,4 @@
-/**
+/**649. Dota2 参议院
  * Dota2 的世界里有两个阵营：Radiant(天辉)和 Dire(夜魇)
  * Dota2 参议院由来自两派的参议员组成。现在参议院希望对一个 Dota2 游戏里的改变作出决定。他们以一个基于轮为过程的投票进行。在每一轮中，每一位参议员都可以行使两项权利中的一项：
  * 禁止一名参议员的权利：
@@ -23,3 +23,31 @@
  * 提示：
  * 给定字符串的长度在 [1, 10,000] 之间.
 **/
+
+/**
+ * @param {string} senate
+ * @return {string}
+ * 运行时间	内存消耗	语言
+   104 ms	41.4 MB	JavaScript
+ */
+var predictPartyVictory = function(senate) {
+    const RArr = [], DArr = [];
+    const sArr = senate.split('')
+    for (let i = 0; i < sArr.length; i++) {
+        if (sArr[i] === 'R'){
+            RArr.push(i)
+        } else {
+            DArr.push(i)
+        }
+    }
+    while(DArr.length && RArr.length) {
+        if (DArr[0] < RArr[0]) {
+            DArr.push(DArr[0]+sArr.length)
+        } else {
+            RArr.push(RArr[0]+sArr.length)
+        }
+        DArr.shift();
+        RArr.shift();
+    }
+    return DArr.length ? 'Dire' : 'Radiant'
+};
