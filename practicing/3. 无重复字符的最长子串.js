@@ -20,3 +20,24 @@
  * 0 <= s.length <= 5 * 104
  * s 由英文字母、数字、符号和空格组成
 **/
+
+/**
+ * @param {string} s
+ * @return {number}
+ * 运行时间	内存消耗	语言
+ * 96 ms	41.8 MB	JavaScript
+ */
+var lengthOfLongestSubstring = function(s) {
+    const arr = [];
+    let max = 0
+    for(let i of s) {
+        const index = arr.indexOf(i);
+        if (index !== -1) {
+            arr.splice(0, index +1)
+        }
+        arr.push(i)
+        max = Math.max(arr.length, max)
+    }
+    return max
+};
+
